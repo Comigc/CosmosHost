@@ -1,0 +1,404 @@
+{
+  "command": [
+    {
+      "name": "help",
+      "actions": [
+        {
+          "name": "help menu",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "6E12A5",
+          "title": "Help Menu",
+          "url": "",
+          "authorname": "${dbsVars.CommandAuthor.displayName}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "No commands are available at this time. Sorry!",
+          "thumbnail": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "info",
+      "actions": [
+        {
+          "name": "InfoResponseEmbed",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "color": "6E12A5",
+          "title": "User Info",
+          "url": "",
+          "authorname": "${dbsVars.CommandAuthor.displayName}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "<@${dbsVars.CommandAuthor.id}> has the ID of ${dbsVars.CommandAuthor.id}.\nAvatar:",
+          "thumbnail": "",
+          "image": "${dbsVars.CommandAuthor.user.avatarURL}",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "prompt",
+      "perms": [],
+      "actions": [
+        {
+          "name": "DeleteCommand",
+          "category": "Message",
+          "type": "Delete Message",
+          "messageActionRows": [],
+          "varname": "${dbsVars.CommandMessage.id}",
+          "channelname": "${dbsVars.CommandChannel.id}"
+        },
+        {
+          "name": "CheckForOwner",
+          "category": "User Action",
+          "type": "Check If User Has Role",
+          "trueActions": [
+            {
+              "name": "StorePollInVar",
+              "category": "Variable",
+              "type": "Store Value in Variable",
+              "messageActionRows": [],
+              "varname": "PollQ",
+              "vartype": "Text",
+              "savevartype": "temp",
+              "param": "0"
+            },
+            {
+              "name": "PromptResponse",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [
+                {
+                  "rowtype": "button",
+                  "buttons": [
+                    {
+                      "label": "Yes",
+                      "customid": "Yes01",
+                      "style": "SUCCESS",
+                      "emoji": "",
+                      "URL": "",
+                      "ephemeral": true
+                    },
+                    {
+                      "label": "No",
+                      "customid": "No02",
+                      "style": "DANGER",
+                      "emoji": "",
+                      "URL": "",
+                      "ephemeral": true
+                    }
+                  ]
+                }
+              ],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "messagetext": "@everyone, ${tempVars.PollQ}",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "ResetOptions",
+              "category": "User Data",
+              "type": "Set User Data",
+              "messageActionRows": [],
+              "user": "433720503732273155",
+              "field": "option1",
+              "fieldvalue": "1"
+            },
+            {
+              "name": "ResetOptions_1",
+              "category": "User Data",
+              "type": "Set User Data",
+              "messageActionRows": [],
+              "user": "433720503732273155",
+              "field": "option2",
+              "fieldvalue": "1"
+            },
+            {
+              "name": "PromptWait",
+              "category": "Control",
+              "type": "Wait",
+              "messageActionRows": [],
+              "waitduration": "600",
+              "unit": "seconds"
+            },
+            {
+              "name": "GetOptions",
+              "category": "User Data",
+              "type": "Get User Data",
+              "messageActionRows": [],
+              "user": "433720503732273155",
+              "field": "option1",
+              "varname": "tallyyes",
+              "savevartype": "temp",
+              "vartype": "User"
+            },
+            {
+              "name": "GetOptions_1",
+              "category": "User Data",
+              "type": "Get User Data",
+              "messageActionRows": [],
+              "user": "433720503732273155",
+              "field": "option2",
+              "varname": "tallyno",
+              "savevartype": "temp",
+              "vartype": "User"
+            },
+            {
+              "name": "CheckForOptionExist",
+              "category": "Variable",
+              "type": "Check If Variable Exists",
+              "trueActions": [
+                {
+                  "name": "GetZeroOption_1_1_1",
+                  "category": "User Data",
+                  "type": "Get User Data",
+                  "messageActionRows": [],
+                  "user": "433720503732273155",
+                  "field": "option1",
+                  "varname": "tallyyescount",
+                  "savevartype": "temp",
+                  "vartype": "User"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "SetUndefinedTo0 Option1_2_2",
+                  "category": "User Data",
+                  "type": "Set User Data",
+                  "messageActionRows": [],
+                  "user": "433720503732273155",
+                  "field": "${tempVars.tallyyes}",
+                  "fieldvalue": "0"
+                },
+                {
+                  "name": "GetZeroOption_1_1",
+                  "category": "User Data",
+                  "type": "Get User Data",
+                  "messageActionRows": [],
+                  "user": "433720503732273155",
+                  "field": "option1",
+                  "varname": "tallyyescount",
+                  "savevartype": "temp",
+                  "vartype": "User"
+                }
+              ],
+              "messageActionRows": [],
+              "varname": "tallyyes",
+              "savevartype": "temp"
+            },
+            {
+              "name": "CheckForOptionExist_1",
+              "category": "Variable",
+              "type": "Check If Variable Exists",
+              "trueActions": [
+                {
+                  "name": "GetZeroOption_1_1_1_1",
+                  "category": "User Data",
+                  "type": "Get User Data",
+                  "messageActionRows": [],
+                  "user": "433720503732273155",
+                  "field": "option2",
+                  "varname": "tallynocount",
+                  "savevartype": "temp",
+                  "vartype": "User"
+                },
+                {
+                  "name": "PollDecideWinner",
+                  "category": "Variable",
+                  "type": "Check Variable Value",
+                  "trueActions": [
+                    {
+                      "name": "PromptSubmitVar_2",
+                      "category": "Message",
+                      "type": "Send Message",
+                      "messageActionRows": [],
+                      "channelname": "${dbsVars.CommandChannel.id}",
+                      "messagetext": "@everyone majority says yes!",
+                      "savetovariable": "",
+                      "savetovariabletype": "temp"
+                    }
+                  ],
+                  "falseActions": [
+                    {
+                      "name": "CheckForTie",
+                      "category": "Variable",
+                      "type": "Check Variable Value",
+                      "trueActions": [
+                        {
+                          "name": "PromptSubmitVar_1_1_1",
+                          "category": "Message",
+                          "type": "Send Message",
+                          "messageActionRows": [],
+                          "channelname": "${dbsVars.CommandChannel.id}",
+                          "messagetext": "@everyone, it's a tie!",
+                          "savetovariable": "",
+                          "savetovariabletype": "temp"
+                        }
+                      ],
+                      "falseActions": [
+                        {
+                          "name": "PromptSubmitVar_1_1",
+                          "category": "Message",
+                          "type": "Send Message",
+                          "messageActionRows": [],
+                          "channelname": "${dbsVars.CommandChannel.id}",
+                          "messagetext": "@everyone majority says no!",
+                          "savetovariable": "",
+                          "savetovariabletype": "temp"
+                        }
+                      ],
+                      "messageActionRows": [],
+                      "varname": "tallyyescount",
+                      "savevartype": "temp",
+                      "compare": "equal to",
+                      "value": "${tempVars.tallynocount}"
+                    }
+                  ],
+                  "messageActionRows": [],
+                  "varname": "tallyyescount",
+                  "savevartype": "temp",
+                  "compare": "greater than",
+                  "value": "${tempVars.tallynocount}"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "SetUndefinedTo0 Option1_2_1",
+                  "category": "User Data",
+                  "type": "Set User Data",
+                  "messageActionRows": [],
+                  "user": "433720503732273155",
+                  "field": "${tempVars.tallyno}",
+                  "fieldvalue": "0"
+                },
+                {
+                  "name": "GetZeroOption_1",
+                  "category": "User Data",
+                  "type": "Get User Data",
+                  "messageActionRows": [],
+                  "user": "433720503732273155",
+                  "field": "option2",
+                  "varname": "tallynocount",
+                  "savevartype": "temp",
+                  "vartype": "User"
+                }
+              ],
+              "messageActionRows": [],
+              "varname": "tallyno",
+              "savevartype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "Youcantusethiscommand",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "messagetext": "<@${dbsVars.CommandAuthor.id}>, you can't use this command!",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "role": "884492555205607525"
+        }
+      ]
+    },
+    {
+      "name": "level",
+      "actions": [
+        {
+          "name": "CheckforLevel",
+          "category": "Channel Action",
+          "type": "Check Channel ID",
+          "messageActionRows": [],
+          "channelid": "973912997049274378",
+          "nomatch": "Please use this command in Commands!"
+        },
+        {
+          "name": "GetLevel",
+          "category": "User Data",
+          "type": "Get User Data",
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "level",
+          "varname": "level",
+          "savevartype": "temp",
+          "vartype": "User"
+        },
+        {
+          "name": "CheckForZero",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "SetXp",
+              "category": "User Data",
+              "type": "Get User Data",
+              "messageActionRows": [],
+              "user": "${dbsVars.CommandAuthor.id}",
+              "field": "xp",
+              "varname": "xp",
+              "savevartype": "temp",
+              "vartype": "User"
+            },
+            {
+              "name": "LevelResponse",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "messagetext": "<@${dbsVars.CommandAuthor.id}>, you are level ${tempVars.level}, with ${tempVars.xp} xp in that current level.",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "falseActions": [
+            {
+              "name": "SetXp_1",
+              "category": "User Data",
+              "type": "Get User Data",
+              "messageActionRows": [],
+              "user": "${dbsVars.CommandAuthor.id}",
+              "field": "xp",
+              "varname": "xp",
+              "savevartype": "temp",
+              "vartype": "User"
+            },
+            {
+              "name": "LevelResponse_1",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "${dbsVars.CommandChannel.id}",
+              "messagetext": "<@${dbsVars.CommandAuthor.id}>, you are level 0, with ${tempVars.xp} xp in that current level.",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            }
+          ],
+          "messageActionRows": [],
+          "user": "${dbsVars.CommandAuthor.id}",
+          "field": "level",
+          "compare": "greater than",
+          "value": "0"
+        }
+      ]
+    }
+  ]
+}

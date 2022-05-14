@@ -1,0 +1,1060 @@
+{
+  "command": [
+    {
+      "name": "User Joins Server",
+      "perms": [],
+      "actions": [
+        {
+          "name": "UserJoinMessage",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "973337130162065419",
+          "color": "6E12A5",
+          "title": "${tempVars.newuser.displayName}",
+          "url": "",
+          "authorname": "${dbsVars.guild.name}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "<@${tempVars.newuser.id}> has joined the server. Enjoy your stay!",
+          "thumbnail": "${tempVars.newuser.user.avatarURL}",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "GiveMember",
+          "category": "User Action",
+          "type": "Add Role to User",
+          "messageActionRows": [],
+          "user": "${tempVars.newuser.id}",
+          "rolename": "884491649328250971"
+        }
+      ],
+      "var": {
+        "user": "newuser"
+      }
+    },
+    {
+      "name": "Any Message",
+      "perms": [],
+      "actions": [
+        {
+          "name": "Edit Xp",
+          "category": "User Data",
+          "type": "Edit User Data",
+          "messageActionRows": [],
+          "user": "${tempVars.anymessagemember.id}",
+          "field": "xp",
+          "oper": "+",
+          "value": "1"
+        },
+        {
+          "name": "CheckForChannel",
+          "category": "Variable",
+          "type": "Check If String Contains",
+          "trueActions": [
+            {
+              "name": "LikeSystem",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [
+                {
+                  "rowtype": "button",
+                  "buttons": [
+                    {
+                      "label": "Like",
+                      "customid": "upvote",
+                      "style": "SECONDARY",
+                      "emoji": "👍",
+                      "URL": "",
+                      "ephemeral": true
+                    },
+                    {
+                      "label": "Dislike",
+                      "customid": "downvote",
+                      "style": "SECONDARY",
+                      "emoji": "👎",
+                      "URL": "",
+                      "ephemeral": true
+                    }
+                  ]
+                }
+              ],
+              "channelname": "${tempVars.anymessage.channel.id}",
+              "messagetext": " 0",
+              "savetovariable": "upvoteID",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "SetUserIDAsData",
+              "category": "User Data",
+              "type": "Set User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "id",
+              "fieldvalue": "${tempVars.anymessagemember.id}"
+            },
+            {
+              "name": "SaveIDAsVar",
+              "category": "User Data",
+              "type": "Get User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "ID",
+              "varname": "ID",
+              "savevartype": "temp",
+              "vartype": "User"
+            }
+          ],
+          "falseActions": [],
+          "messageActionRows": [],
+          "stringtocheck": "${tempVars.anymessage.channel.id}",
+          "valuetocheck": "974795655035908176"
+        },
+        {
+          "name": "Check Xp",
+          "category": "User Data",
+          "type": "Check User Data",
+          "trueActions": [
+            {
+              "name": "Reset Xp",
+              "category": "User Data",
+              "type": "Set User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "xp",
+              "fieldvalue": "0"
+            },
+            {
+              "name": "Edit Level",
+              "category": "User Data",
+              "type": "Edit User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "level",
+              "oper": "+",
+              "value": "1"
+            },
+            {
+              "name": "Get Level",
+              "category": "User Data",
+              "type": "Get User Data",
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "level",
+              "varname": "level",
+              "savevartype": "temp",
+              "vartype": "User"
+            },
+            {
+              "name": "Ping",
+              "category": "Message",
+              "type": "Send Message",
+              "messageActionRows": [],
+              "channelname": "974796569905868831",
+              "messagetext": "<@${tempVars.anymessagemember.id}>",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "LevelUpMsg",
+              "category": "Message",
+              "type": "Send Embed",
+              "messageActionRows": [],
+              "channelname": "974796569905868831",
+              "color": "5F2880",
+              "title": "Level Up",
+              "url": "",
+              "authorname": "${tempVars.anymessagemember.displayName}",
+              "authorimageurl": "",
+              "authorlink": "",
+              "description": "<@${tempVars.anymessagemember.id}> has now reached level:\n${tempVars.level}\n**Congratulations!**",
+              "thumbnail": "${tempVars.anymessagemember.user.avatarURL}",
+              "image": "",
+              "footer": "",
+              "timestamp": "BOOL_TRUE@@",
+              "savetovariable": "",
+              "savetovariabletype": "temp"
+            },
+            {
+              "name": "LevelRoleCheck",
+              "category": "User Data",
+              "type": "Check User Data",
+              "trueActions": [
+                {
+                  "name": "GiveLevel5",
+                  "category": "User Action",
+                  "type": "Add Role to User",
+                  "messageActionRows": [],
+                  "user": "${tempVars.anymessagemember.id}",
+                  "rolename": "974835056713560064"
+                }
+              ],
+              "falseActions": [
+                {
+                  "name": "LevelRoleCheck_1",
+                  "category": "User Data",
+                  "type": "Check User Data",
+                  "trueActions": [
+                    {
+                      "name": "GiveLevel10",
+                      "category": "User Action",
+                      "type": "Add Role to User",
+                      "messageActionRows": [],
+                      "user": "${tempVars.anymessagemember.id}",
+                      "rolename": "974835163710259261"
+                    }
+                  ],
+                  "falseActions": [
+                    {
+                      "name": "LevelRoleCheck_1_1",
+                      "category": "User Data",
+                      "type": "Check User Data",
+                      "trueActions": [
+                        {
+                          "name": "GiveLevel20",
+                          "category": "User Action",
+                          "type": "Add Role to User",
+                          "messageActionRows": [],
+                          "user": "${tempVars.anymessagemember.id}",
+                          "rolename": "974835278525116446"
+                        }
+                      ],
+                      "falseActions": [
+                        {
+                          "name": "LevelRoleCheck_1_1_1",
+                          "category": "User Data",
+                          "type": "Check User Data",
+                          "trueActions": [
+                            {
+                              "name": "GiveLevel45",
+                              "category": "User Action",
+                              "type": "Add Role to User",
+                              "messageActionRows": [],
+                              "user": "${tempVars.anymessagemember.id}",
+                              "rolename": "974835308065603605"
+                            }
+                          ],
+                          "falseActions": [
+                            {
+                              "name": "LevelRoleCheck_1_1_1_1",
+                              "category": "User Data",
+                              "type": "Check User Data",
+                              "trueActions": [
+                                {
+                                  "name": "GiveLevel75",
+                                  "category": "User Action",
+                                  "type": "Add Role to User",
+                                  "messageActionRows": [],
+                                  "user": "${tempVars.anymessagemember.id}",
+                                  "rolename": "974835390022287360"
+                                }
+                              ],
+                              "falseActions": [
+                                {
+                                  "name": "LevelRoleCheck_1_1_1_1_1",
+                                  "category": "User Data",
+                                  "type": "Check User Data",
+                                  "trueActions": [
+                                    {
+                                      "name": "GiveLevel100",
+                                      "category": "User Action",
+                                      "type": "Add Role to User",
+                                      "messageActionRows": [],
+                                      "user": "${tempVars.anymessagemember.id}",
+                                      "rolename": "974835493940375642"
+                                    }
+                                  ],
+                                  "falseActions": [
+                                    {
+                                      "name": "LevelRoleCheck_1_1_1_1_1_1",
+                                      "category": "User Data",
+                                      "type": "Check User Data",
+                                      "trueActions": [
+                                        {
+                                          "name": "GiveLevel150",
+                                          "category": "User Action",
+                                          "type": "Add Role to User",
+                                          "messageActionRows": [],
+                                          "user": "${tempVars.anymessagemember.id}",
+                                          "rolename": "974835534704820224"
+                                        }
+                                      ],
+                                      "falseActions": [
+                                        {
+                                          "name": "LevelRoleCheck_1_1_1_1_1_1_1",
+                                          "category": "User Data",
+                                          "type": "Check User Data",
+                                          "trueActions": [
+                                            {
+                                              "name": "GiveLevel200",
+                                              "category": "User Action",
+                                              "type": "Add Role to User",
+                                              "messageActionRows": [],
+                                              "user": "${tempVars.anymessagemember.id}",
+                                              "rolename": "974835599200628786"
+                                            }
+                                          ],
+                                          "falseActions": [],
+                                          "messageActionRows": [],
+                                          "user": "${tempVars.anymessagemember.id}",
+                                          "field": "level",
+                                          "compare": "equal to",
+                                          "value": "200"
+                                        }
+                                      ],
+                                      "messageActionRows": [],
+                                      "user": "${tempVars.anymessagemember.id}",
+                                      "field": "level",
+                                      "compare": "equal to",
+                                      "value": "150"
+                                    }
+                                  ],
+                                  "messageActionRows": [],
+                                  "user": "${tempVars.anymessagemember.id}",
+                                  "field": "level",
+                                  "compare": "equal to",
+                                  "value": "100"
+                                }
+                              ],
+                              "messageActionRows": [],
+                              "user": "${tempVars.anymessagemember.id}",
+                              "field": "level",
+                              "compare": "equal to",
+                              "value": "75"
+                            }
+                          ],
+                          "messageActionRows": [],
+                          "user": "${tempVars.anymessagemember.id}",
+                          "field": "level",
+                          "compare": "equal to",
+                          "value": "45"
+                        }
+                      ],
+                      "messageActionRows": [],
+                      "user": "${tempVars.anymessagemember.id}",
+                      "field": "level",
+                      "compare": "equal to",
+                      "value": "20"
+                    }
+                  ],
+                  "messageActionRows": [],
+                  "user": "${tempVars.anymessagemember.id}",
+                  "field": "level",
+                  "compare": "equal to",
+                  "value": "10"
+                }
+              ],
+              "messageActionRows": [],
+              "user": "${tempVars.anymessagemember.id}",
+              "field": "level",
+              "compare": "equal to",
+              "value": "5"
+            }
+          ],
+          "falseActions": [],
+          "messageActionRows": [],
+          "user": "${tempVars.anymessagemember.id}",
+          "field": "xp",
+          "compare": "greater than",
+          "value": "249"
+        }
+      ],
+      "var": {}
+    },
+    {
+      "name": "User Kicked",
+      "perms": [],
+      "actions": [
+        {
+          "name": "KickLog",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "User Kicked",
+          "url": "",
+          "authorname": "${tempVars.kickuser.displayName}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.kickuser.user.tag} was kicked.",
+          "thumbnail": "${tempVars.kickuser.user.avatarURL}",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "channelbase",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "user": "kickuser"
+      }
+    },
+    {
+      "name": "User Banned",
+      "perms": [],
+      "actions": [
+        {
+          "name": "BanLog",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "User Banned",
+          "url": "",
+          "authorname": "${tempVars.banuser.displayName}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.banuser.user.tag} was banned.",
+          "thumbnail": "${tempVars.banuser.user.avatarURL}",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "user": "banuser"
+      }
+    },
+    {
+      "name": "Bot Initialization",
+      "perms": [],
+      "actions": [],
+      "var": {}
+    },
+    {
+      "name": "Channel Create",
+      "perms": [],
+      "actions": [
+        {
+          "name": "ChannelCreateLog",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "Channel Created",
+          "url": "",
+          "authorname": "${tempVars.createdchannel.name}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.createdchannel.type} channel, <#${tempVars.createdchannel.id}>, was created.",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": "createdchannel"
+      }
+    },
+    {
+      "name": "Channel Delete",
+      "perms": [],
+      "actions": [
+        {
+          "name": "ChannelDeleteLog_1",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "Channel Deleted",
+          "url": "",
+          "authorname": "${tempVars.deletedchannel.name}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.deletedchannel.type} channel, <#${tempVars.deletedchannel.id}>, was deleted.",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": "deletedchannel"
+      }
+    },
+    {
+      "name": "Channel Pins Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatepinschannel"
+      }
+    },
+    {
+      "name": "Channel Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatechannel"
+      }
+    },
+    {
+      "name": "Emoji Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "createdemoji"
+      }
+    },
+    {
+      "name": "Emoji Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "deletedemoji"
+      }
+    },
+    {
+      "name": "Emoji Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": "updatedemoji"
+      }
+    },
+    {
+      "name": "Guild Ban Remove",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Create",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Delete",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Available",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Speaking",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Member Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Unavailable",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Guild Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Message Delete",
+      "perms": [],
+      "actions": [
+        {
+          "name": "MsgDeleteLog",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "Message Deleted",
+          "url": "",
+          "authorname": "${tempVars.deletedmessage.author.tag}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Channel:\n${tempVars.deletedmessage.channel.name}\n\nMessage:\n${tempVars.deletedmessage.content}",
+          "thumbnail": "${tempVars.deletedmessage.author.avatarURL}",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Message Update",
+      "perms": [],
+      "actions": [
+        {
+          "name": "MsgUpdateLog",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "Message Edited",
+          "url": "",
+          "authorname": "${tempVars.updatedmessageold.author.tag}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Channel:\n${tempVars.updatedmessageold.channel.name}\n\nFrom:\n${tempVars.updatedmessageold.content}\n\nTo:\n${tempVars.updatedmessagenew.content}",
+          "thumbnail": "${tempVars.updatedmessagenew.author.avatarURL}",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Create",
+      "perms": [],
+      "actions": [
+        {
+          "name": "RoleCreateLog",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "Role Created",
+          "url": "",
+          "authorname": "${tempVars.createdrole.name}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.createdrole} was created, with ${tempVars.createdrole.hexColor} color, and is ${tempVars.createdrole.calculatedPosition} in role position.",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Delete",
+      "perms": [],
+      "actions": [
+        {
+          "name": "RoleDeleteLog",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "Role Deleted",
+          "url": "",
+          "authorname": "${tempVars.deletedrole.name}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.deletedrole} was deleted.",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Role Update",
+      "perms": [],
+      "actions": [
+        {
+          "name": "RoleUpdateLog",
+          "category": "Message",
+          "type": "Send Embed",
+          "messageActionRows": [],
+          "channelname": "972275561823092776",
+          "color": "6E12A5",
+          "title": "Role Updated",
+          "url": "",
+          "authorname": "${tempVars.updatedrolenew.name}",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "${tempVars.updatedrolenew} Role was changed:\nFrom:\n${tempVars.updatedroleold.name}\n${tempVars.updatedroleold.calculatedPosition}\n${tempVars.updatedroleold.hexColor}\nTo:\n${tempVars.updatedrolenew.name}\n${tempVars.updatedrolenew.calculatedPosition}\n${tempVars.updatedrolenew.hexColor}",
+          "thumbnail": "",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Typing Start",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "User Update",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Button Interaction",
+      "perms": [],
+      "actions": [
+        {
+          "name": "SelectionFilter",
+          "category": "Control",
+          "type": "Switch Case",
+          "valueActions": {
+            "Yes01": [
+              {
+                "name": "CheckForLock",
+                "category": "User Data",
+                "type": "Check User Data",
+                "trueActions": [
+                  {
+                    "name": "LockedOut",
+                    "category": "Interaction",
+                    "type": "Reply To Interaction With Message",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.buttoninteraction}",
+                    "messagetext": "You have already submitted! This action cannot be done again."
+                  },
+                  {
+                    "name": "WaitUntilUnlock_2",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "600",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "Unlock_2",
+                    "category": "User Data",
+                    "type": "Set User Data",
+                    "messageActionRows": [],
+                    "user": "${tempVars.buttoninteraction.member.id}",
+                    "field": "locked",
+                    "fieldvalue": "0"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "plus",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "433720503732273155",
+                    "field": "option1",
+                    "oper": "+",
+                    "value": "1"
+                  },
+                  {
+                    "name": "LockIn",
+                    "category": "User Data",
+                    "type": "Set User Data",
+                    "messageActionRows": [],
+                    "user": "${tempVars.buttoninteraction.member.id}",
+                    "field": "locked",
+                    "fieldvalue": "1"
+                  },
+                  {
+                    "name": "OptionTest",
+                    "category": "Interaction",
+                    "type": "Reply To Interaction With Message",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.buttoninteraction}",
+                    "messagetext": "You have submitted. Thank you."
+                  },
+                  {
+                    "name": "WaitUntilUnlock",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "600",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "Unlock",
+                    "category": "User Data",
+                    "type": "Set User Data",
+                    "messageActionRows": [],
+                    "user": "${tempVars.buttoninteraction.member.id}",
+                    "field": "locked",
+                    "fieldvalue": "0"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${tempVars.buttoninteraction.member.id}",
+                "field": "locked",
+                "compare": "equal to",
+                "value": "1"
+              }
+            ],
+            "No02": [
+              {
+                "name": "CheckForLock_1",
+                "category": "User Data",
+                "type": "Check User Data",
+                "trueActions": [
+                  {
+                    "name": "LockedOut_1",
+                    "category": "Interaction",
+                    "type": "Reply To Interaction With Message",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.buttoninteraction}",
+                    "messagetext": "You have already submitted! This action cannot be done again."
+                  },
+                  {
+                    "name": "WaitUntilUnlock_2_1",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "600",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "Unlock_2_1",
+                    "category": "User Data",
+                    "type": "Set User Data",
+                    "messageActionRows": [],
+                    "user": "${tempVars.buttoninteraction.member.id}",
+                    "field": "locked",
+                    "fieldvalue": "0"
+                  }
+                ],
+                "falseActions": [
+                  {
+                    "name": "plus_1",
+                    "category": "User Data",
+                    "type": "Edit User Data",
+                    "messageActionRows": [],
+                    "user": "433720503732273155",
+                    "field": "option2",
+                    "oper": "+",
+                    "value": "1"
+                  },
+                  {
+                    "name": "LockIn_1",
+                    "category": "User Data",
+                    "type": "Set User Data",
+                    "messageActionRows": [],
+                    "user": "${tempVars.buttoninteraction.member.id}",
+                    "field": "locked",
+                    "fieldvalue": "1"
+                  },
+                  {
+                    "name": "OptionTest_1",
+                    "category": "Interaction",
+                    "type": "Reply To Interaction With Message",
+                    "messageActionRows": [],
+                    "interactionobject": "${tempVars.buttoninteraction}",
+                    "messagetext": "You have submitted. Thank you."
+                  },
+                  {
+                    "name": "WaitUntilUnlock_1",
+                    "category": "Control",
+                    "type": "Wait",
+                    "messageActionRows": [],
+                    "waitduration": "600",
+                    "unit": "seconds"
+                  },
+                  {
+                    "name": "Unlock_1",
+                    "category": "User Data",
+                    "type": "Set User Data",
+                    "messageActionRows": [],
+                    "user": "${tempVars.buttoninteraction.member.id}",
+                    "field": "locked",
+                    "fieldvalue": "0"
+                  }
+                ],
+                "messageActionRows": [],
+                "user": "${tempVars.buttoninteraction.member.id}",
+                "field": "locked",
+                "compare": "equal to",
+                "value": "1"
+              }
+            ],
+            "upvote": [
+              {
+                "name": "EditVoteScore",
+                "category": "User Data",
+                "type": "Edit User Data",
+                "messageActionRows": [],
+                "user": "${tempVars.ID}",
+                "field": "votescore",
+                "oper": "+",
+                "value": "1"
+              },
+              {
+                "name": "GetValueToVar",
+                "category": "User Data",
+                "type": "Get User Data",
+                "messageActionRows": [],
+                "user": "${tempVars.ID}",
+                "field": "votescore",
+                "varname": "votescore",
+                "savevartype": "temp",
+                "vartype": "User"
+              },
+              {
+                "name": "EditScore",
+                "category": "Message",
+                "type": "Edit Message",
+                "messageActionRows": [],
+                "channelname": "974795655035908176",
+                "messageid": "${tempVars.upvoteID.id}",
+                "messagetext": "${tempVars.votescore}"
+              },
+              {
+                "name": "DeleteTHinking",
+                "category": "Interaction",
+                "type": "Delete Interaction Reply",
+                "messageActionRows": [],
+                "interactionobject": "${tempVars.buttoninteraction}"
+              }
+            ],
+            "downvote": [
+              {
+                "name": "EditVoteScore_1",
+                "category": "User Data",
+                "type": "Edit User Data",
+                "messageActionRows": [],
+                "user": "${tempVars.ID}",
+                "field": "votescore",
+                "oper": "+",
+                "value": "1"
+              },
+              {
+                "name": "GetValueToVar",
+                "category": "User Data",
+                "type": "Get User Data",
+                "messageActionRows": [],
+                "user": "${tempVars.ID}",
+                "field": "votescore",
+                "varname": "votescore",
+                "savevartype": "temp",
+                "vartype": "User"
+              },
+              {
+                "name": "EditScore",
+                "category": "Message",
+                "type": "Edit Message",
+                "messageActionRows": [],
+                "channelname": "974795655035908176",
+                "messageid": "${tempVars.upvoteID.id}",
+                "messagetext": "${tempVars.votescore}"
+              },
+              {
+                "name": "DeleteTHinking",
+                "category": "Interaction",
+                "type": "Delete Interaction Reply",
+                "messageActionRows": [],
+                "interactionobject": "${tempVars.buttoninteraction}"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "varname": "${tempVars.buttoninteraction.customId}"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Select Interaction",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "channel": ""
+      }
+    },
+    {
+      "name": "Command Interaction",
+      "perms": [],
+      "actions": [
+        {
+          "name": "CommandFilter",
+          "category": "Control",
+          "type": "Switch Case",
+          "valueActions": {
+            "testsend": [
+              {
+                "name": "LevelResponse",
+                "category": "Message",
+                "type": "Send Message",
+                "messageActionRows": [],
+                "channelname": "${tempVars.commandinteraction.channel}",
+                "messagetext": "${tempVars.commandinteraction.options}",
+                "savetovariable": "",
+                "savetovariabletype": "temp"
+              }
+            ]
+          },
+          "messageActionRows": [],
+          "varname": "${tempVars.commandinteraction.commandName}"
+        }
+      ],
+      "var": {
+        "channel": ""
+      }
+    }
+  ]
+}
